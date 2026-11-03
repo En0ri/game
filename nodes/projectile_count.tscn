@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://c4rup8trlwbat"]
+
+[ext_resource type="Script" uid="uid://bxk8qfnhxlrh2" path="res://nodes/projectile_count.gd" id="1_536tt"]
+
+[node name="Control" type="Control" unique_id=1983298960 node_paths=PackedStringArray("_label_count")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_536tt")
+_label_count = NodePath("BoxContainer/boxProjectileCount/ProjectileCount")
+
+[node name="BoxContainer" type="VBoxContainer" parent="." unique_id=1252302594]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -306.0
+offset_top = -175.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="boxLabelProjectile" type="BoxContainer" parent="BoxContainer" unique_id=673173588]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ProjectileLabel" type="Label" parent="BoxContainer/boxLabelProjectile" unique_id=335748933]
+layout_mode = 2
+text = "Projectile count"
+
+[node name="boxProjectileCount" type="HBoxContainer" parent="BoxContainer" unique_id=1025984728]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ProjectileCount" type="Label" parent="BoxContainer/boxProjectileCount" unique_id=1122809611]
+layout_mode = 2
+text = "0/10"
