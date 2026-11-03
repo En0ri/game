@@ -1,8 +1,8 @@
 extends CharacterBody2D
 class_name Player
 
-@onready var scene = get_tree().current_scene
 const projectile = preload("res://nodes/Projectile.tscn")
+@onready var projectile_texture = $ProjectileTexture
 @onready var _animation_player = $AnimationPlayer
 
 @export var projectile_counter_ui : Control
@@ -12,19 +12,6 @@ const projectile = preload("res://nodes/Projectile.tscn")
 		if projectile_counter_ui:
 			projectile_counter_ui.updCount(value)
 
-@export var _label_count : Label
-@onready var projectile_texture = $ProjectileTexture
-var AIMING = false
-@export var throw_speed = 300
-const SPEED = 150.0
-const JUMP_VELOCITY = -300.0
-var JUMP_AVAILIBLE = true
-var facing_dir = 1
-
-func _ready() -> void:
-	projectile_counter_ui.updCount(projectile_count)
-	projectile_texture.visible = false
-
 @export var health_bar : Control
 @export var health = 100:
 	set(value):
@@ -33,6 +20,17 @@ func _ready() -> void:
 			health_bar.health = value
 		if health <= 0:
 			get_tree().reload_current_scene()
+
+@export var throw_speed = 300
+var AIMING = false
+const SPEED = 150.0
+const JUMP_VELOCITY = -300.0
+var JUMP_AVAILIBLE = true
+var facing_dir = 1
+
+func _ready() -> void:
+	projectile_counter_ui.updCount(projectile_count)
+	projectile_texture.visible = false
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -58,9 +56,9 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		_animation_player.stop()
 	
-	if Input.is_action_just_pressed("Interact"):
-		pass
+	if Input.is_action_just_pressed("Interact"): pass
 	
+	# Projectile shooting and aiming
 	if Input.is_action_just_pressed("M1") and AIMING: shoot_projectile()
 	if Input.is_action_just_pressed("M2"): AIMING = true
 	if Input.is_action_just_released("M2"): AIMING = false
@@ -72,14 +70,14 @@ func _physics_process(delta: float) -> void:
 		projectile_texture.visible = false
 	
 	move_and_slide()
-	
+
 func shoot_projectile():
 	if projectile_count:
 		var projectileInstance = projectile.instantiate()
 		projectileInstance.global_position = position
 		projectileInstance.speed = throw_speed
 		rotate_projectile(projectileInstance)
-		scene.add_child.call_deferred(projectileInstance)
+		get_tree().current_scene.add_child.call_deferred(projectileInstance)
 		projectile_count -= 1
 		AIMING = false 
 

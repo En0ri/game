@@ -70,8 +70,9 @@ _data = {
 &"hit": SubResource("Animation_vqvw3")
 }
 
-[node name="ProjectileTexture" type="Node2D" unique_id=195955382]
+[node name="ProjectileTexture" type="Node2D" unique_id=195955382 node_paths=PackedStringArray("animation_player")]
 script = ExtResource("1_068cg")
+animation_player = NodePath("AnimationPlayer")
 
 [node name="Handle" type="Sprite2D" parent="." unique_id=1211959478]
 position = Vector2(-1.0000005, 9.536743e-07)

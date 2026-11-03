@@ -4,18 +4,18 @@ extends Control
 
 @export var accuracy : float = 0.1
 @export var speed : float = 0.01
-var time : float = 0
+@export var normal_health_color : Color = Color(0.76, 0.111, 0.763, 0.82)
+@export var low_health_color : Color = Color(0.518, 0.0, 0.067, 0.82)
+@export var background_color : Color = Color(0.388, 0.004, 0.608, 0.608)
+
 @export var health : float = 100:
 	set(value):
 		health = value
-
 @export var max_health : float = 100:
 	set(value):
 		max_health = value
 
-@export var normal_health_color : Color = Color(0.76, 0.111, 0.763, 0.82)
-@export var low_health_color : Color = Color(0.518, 0.0, 0.067, 0.82)
-@export var background_color : Color = Color(0.388, 0.004, 0.608, 0.608)
+var time : float = 0
 
 func _ready() -> void:
 	Progress_bar.get_theme_stylebox("fill").bg_color = normal_health_color
