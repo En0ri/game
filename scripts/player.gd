@@ -11,26 +11,28 @@ const projectile = preload("res://nodes/Projectile.tscn")
 		projectile_count = value
 		if projectile_counter_ui:
 			projectile_counter_ui.updCount(value)
-		
+
 @export var _label_count : Label
+@onready var projectile_texture = $ProjectileTexture
+var AIMING = false
+@export var throw_speed = 300
 const SPEED = 150.0
 const JUMP_VELOCITY = -300.0
 var JUMP_AVAILIBLE = true
 var facing_dir = 1
 
 func _ready() -> void:
-	projectile_counter_ui.updCount(value)
-	
-func _input(event):
-	# Mouse in viewport coordinates.
-	if event is InputEventMouseButton:
-		if event.is_action_pressed("M1"): print("Mouse 1 Click")
-		if event.is_action_pressed("M2"): print("Mouse 2 Click")
-		if event.is_action_released("M1"): print("Mouse 1 unclick")
-		if event.is_action_released("M2"): print("Mouse 2 unclick")
-		print("Viewport Resolution is: ", get_viewport().get_visible_rect().size)
-	elif event is InputEventMouseMotion:
-		print("Mouse Motion at: ", get_viewport().get_mouse_position())# physic process pārcelt
+	projectile_counter_ui.updCount(projectile_count)
+	projectile_texture.visible = false
+
+@export var health_bar : Control
+@export var health = 100:
+	set(value):
+		health = value
+		if health_bar:
+			health_bar.health = value
+		if health <= 0:
+			get_tree().reload_current_scene()
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -55,14 +57,35 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		_animation_player.stop()
-
-	# projectiles
-	if Input.is_action_just_pressed("Interact") and projectile_count:
-		var projectileInstance = projectile.instantiate()
-		projectileInstance.global_position = position
-		projectileInstance.speed = 200
-		projectileInstance.direction = -1 if facing_dir < 0 else 1
-		scene.add_child.call_deferred(projectileInstance)
-		projectile_count -= 1
+	
+	if Input.is_action_just_pressed("Interact"):
+		pass
+	
+	if Input.is_action_just_pressed("M1") and AIMING: shoot_projectile()
+	if Input.is_action_just_pressed("M2"): AIMING = true
+	if Input.is_action_just_released("M2"): AIMING = false
+	
+	if AIMING and projectile_count:
+		projectile_texture.visible = true
+		rotate_projectile(projectile_texture)
+	elif !AIMING and projectile_texture.visible:
+		projectile_texture.visible = false
 	
 	move_and_slide()
+	
+func shoot_projectile():
+	if projectile_count:
+		var projectileInstance = projectile.instantiate()
+		projectileInstance.global_position = position
+		projectileInstance.speed = throw_speed
+		rotate_projectile(projectileInstance)
+		scene.add_child.call_deferred(projectileInstance)
+		projectile_count -= 1
+		AIMING = false 
+
+func rotate_projectile(body):
+	body.look_at(get_global_mouse_position())
+	var p_rotation = rad_to_deg(body.rotation)
+	if abs(rad_to_deg(body.rotation)) > 90:
+		body.scale = Vector2(1,-1)
+	else: body.scale = Vector2(1,1)

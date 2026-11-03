@@ -16,8 +16,10 @@ script = ExtResource("1_i0qvv")
 [node name="ProgressBar" type="ProgressBar" parent="." unique_id=1608368253]
 unique_name_in_owner = true
 layout_mode = 1
-offset_right = 299.0
-offset_bottom = 60.0
+offset_left = 13.0
+offset_top = 14.0
+offset_right = 236.0
+offset_bottom = 42.0
 value = 100.0
 allow_greater = true
 allow_lesser = true
