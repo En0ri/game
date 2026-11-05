@@ -48,6 +48,9 @@ _data = {
 [node name="Player" type="CharacterBody2D" unique_id=1648563641]
 collision_mask = 12
 script = ExtResource("1_kpjcp")
+projectile_count = null
+health = null
+throw_speed = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=179102890]
 position = Vector2(0, 4)
