@@ -100,7 +100,8 @@ position = Vector2(-199, 66)
 [node name="HealthBar" parent="CanvasLayer" unique_id=482008639 instance=ExtResource("5_t4kq8")]
 
 [node name="Control" parent="CanvasLayer" unique_id=1983298960 instance=ExtResource("6_ns8we")]
-offset_left = -52.0
-offset_top = 52.0
-offset_right = -805.0
-offset_bottom = -422.0
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+grow_horizontal = 0
+grow_vertical = 0
