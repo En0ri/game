@@ -33,7 +33,6 @@ func _ready() -> void:
 	projectile_counter_ui.updCount(projectile_count)
 	projectile_texture.visible = false
 	
-	SaveManager.load_game()
 	data = SaveManager.data.player
 	print(data.hp)
 	data.hp = 50
