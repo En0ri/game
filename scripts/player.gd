@@ -13,13 +13,13 @@ const projectile = preload("res://nodes/Projectile.tscn")
 			projectile_counter_ui.updCount(value)
 
 @export var health_bar : Control
-@export var health = 100:
+@export var health :int = 100:
 	set(value):
 		health = value
 		if health_bar:
 			health_bar.health = value
-		#if health <= 0:
-			#get_tree().reload_current_scene()
+		if health <= 0:
+			get_tree().reload_current_scene()
 
 @export var throw_speed = 300
 var AIMING = false
