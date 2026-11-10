@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://v46akennpmfb" path="res://nodes/enemy.tscn" id="4_podbc"]
 [ext_resource type="PackedScene" uid="uid://dpbsp2lv78urv" path="res://nodes/health_bar.tscn" id="5_t4kq8"]
 [ext_resource type="PackedScene" uid="uid://c4rup8trlwbat" path="res://nodes/projectile_count.tscn" id="6_ns8we"]
+[ext_resource type="PackedScene" uid="uid://cycu0wxd3c48y" path="res://nodes/checkpoint.tscn" id="7_rkg11"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qscmc"]
 texture = ExtResource("1_papbn")
@@ -108,3 +109,15 @@ anchor_left = 1.0
 anchor_top = 1.0
 grow_horizontal = 0
 grow_vertical = 0
+
+[node name="checkpoint" parent="." unique_id=508727053 instance=ExtResource("7_rkg11")]
+position = Vector2(120, 198)
+
+[node name="checkpoint2" parent="." unique_id=1013827186 instance=ExtResource("7_rkg11")]
+position = Vector2(206, -250)
+
+[node name="checkpoint3" parent="." unique_id=1419166802 instance=ExtResource("7_rkg11")]
+position = Vector2(111, -378)
+
+[node name="checkpoint4" parent="." unique_id=1069089727 instance=ExtResource("7_rkg11")]
+position = Vector2(-315, 38)

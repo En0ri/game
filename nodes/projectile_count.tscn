@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c4rup8trlwbat"]
 
-[ext_resource type="Script" uid="uid://bxk8qfnhxlrh2" path="res://nodes/projectile_count.gd" id="1_536tt"]
+[ext_resource type="Script" uid="uid://bxk8qfnhxlrh2" path="res://scripts/projectile_count.gd" id="1_536tt"]
 
 [node name="Control" type="Control" unique_id=1983298960 node_paths=PackedStringArray("_label_count")]
 layout_mode = 3
