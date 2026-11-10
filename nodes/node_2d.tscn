@@ -83,7 +83,10 @@ layer_1/tile_data = PackedInt32Array(-589830, 65536, 2, -1376258, 131072, 2, -13
 [node name="Player" parent="." unique_id=1648563641 node_paths=PackedStringArray("projectile_counter_ui", "health_bar") instance=ExtResource("1_qscmc")]
 position = Vector2(-17, 36)
 projectile_counter_ui = NodePath("../CanvasLayer/Control")
+projectile_count = 10
 health_bar = NodePath("../CanvasLayer/HealthBar")
+health = 100
+throw_speed = 300
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=631634017]
 zoom = Vector2(3, 3)

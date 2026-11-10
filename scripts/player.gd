@@ -6,34 +6,35 @@ const projectile = preload("res://nodes/Projectile.tscn")
 @onready var _animation_player = $AnimationPlayer
 
 @export var projectile_counter_ui : Control
-@export var projectile_count = 10:
+@export var projectile_count : int  = 10:
 	set(value):
 		projectile_count = value
 		if projectile_counter_ui:
 			projectile_counter_ui.updCount(value)
 
 @export var health_bar : Control
-@export var health = 100:
+@export var health : int = 100:
 	set(value):
 		health = value
 		if health_bar:
 			health_bar.health = value
-		#if health <= 0:
-			#get_tree().reload_current_scene()
+		if health < 0:
+			get_tree().reload_current_scene()
 
-@export var throw_speed = 300
+@export var throw_speed : int = 300
 var AIMING = false
 const SPEED = 150.0
 const JUMP_VELOCITY = -300.0
 var JUMP_AVAILIBLE = true
 var facing_dir = 1
 
-var data := PlayerData.new()
+var data : PlayerData
 func _ready() -> void:
 	projectile_counter_ui.updCount(projectile_count)
 	projectile_texture.visible = false
 	
 	SaveManager.load_game()
+	data = SaveManager.data.player
 	print(data.hp)
 	data.hp = 50
 	SaveManager.save_game()

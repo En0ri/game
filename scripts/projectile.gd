@@ -2,7 +2,7 @@ extends CharacterBody2D
 class_name Projectile
 
 @onready var ProjectileTexture = %ProjectileTexture.animation_player
-@export var speed = 0
+@export var speed : float
 
 func _physics_process(delta: float) -> void:
 	velocity = transform.x * speed
