@@ -20,6 +20,11 @@ const projectile = preload("res://nodes/Projectile.tscn")
 			health_bar.health = value
 		if health <= 0:
 			get_tree().reload_current_scene()
+@export var max_health :int = 100:
+	set(value):
+		max_health = value
+		if health_bar:
+			health_bar.max_health = value
 
 @export var throw_speed = 300
 var AIMING = false
@@ -28,16 +33,29 @@ const JUMP_VELOCITY = -300.0
 var JUMP_AVAILIBLE = true
 var facing_dir = 1
 
-var data := PlayerData.new()
+var stats : PlayerData
+var save_signal: Signal
+
 func _ready() -> void:
 	projectile_counter_ui.updCount(projectile_count)
 	projectile_texture.visible = false
 	
-	SaveManager.load_game()
-	print(data.hp)
-	data.hp = 50
-	SaveManager.save_game()
-	print(data.hp)
+	stats = SaveManager.data.player
+	_load_data()
+	SaveManager.data.saving_data.connect(_save_data)
+	#SaveManager.data.saving_data.emit()
+	#SaveManager.save_game()
+
+func _load_data():
+	health = stats.hp
+	max_health = stats.max_hp
+	position = stats.position
+	projectile_count = stats.projectile_count
+func _save_data():
+	stats.hp = health
+	stats.max_hp = max_health
+	stats.position = global_position
+	stats.projectile_count = projectile_count
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
