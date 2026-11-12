@@ -43,8 +43,6 @@ func _ready() -> void:
 	stats = SaveManager.data.player
 	_load_data()
 	SaveManager.data.saving_data.connect(_save_data)
-	#SaveManager.data.saving_data.emit()
-	#SaveManager.save_game()
 
 func _load_data():
 	health = stats.hp

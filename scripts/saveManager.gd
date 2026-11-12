@@ -23,6 +23,6 @@ func load_game() -> bool:
 	if loaded == null:
 		printerr("Saglabājuma fails ir bojāts vai nelasāms.")
 		return false
-	print("viss ok!")
+	print("game loaded")
 	data = loaded
 	return true

@@ -6,6 +6,7 @@
 size = Vector2(70, 20)
 
 [node name="checkpoint" type="Area2D" unique_id=508727053]
+collision_layer = 13
 script = ExtResource("1_krj72")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1697863979]
